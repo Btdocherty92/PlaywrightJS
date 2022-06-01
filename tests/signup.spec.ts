@@ -1,5 +1,6 @@
 import { test, expect, Page } from '@playwright/test';
 import { SignUpPage } from './PageObjects/signUp-page';
+import { SignUp } from './PageObjects/sign-up-page-selectors-outside-constructor';
 
 const user = {
     name: "test_user",
@@ -22,35 +23,34 @@ test.beforeEach(async ({ page }) => {
 test.describe('Sign up', () => {
 
     test('sign up button should open dialog', async ({page}) => {
-        const signUpPage = new SignUpPage(page);
-        await signUpPage.checkTitleText('Sign up');
-        //await expect(page.locator(selectors.modalTitle)).toHaveText('Sign up');
+        const signUp = new SignUp(page);
+        await signUp.checkTitleText('Sign up');
     });
 
     test('Close should cancel sign up', async ({page}) => {
-        const signUpPage = new SignUpPage(page);
+        const signUp = new SignUp(page);
         const name = GenerateName();
-        await signUpPage.fillDetails(`${user.name}${name}`, user.password);
-        await signUpPage.cancelSignUp("button");
+        await signUp.fillDetails(`${user.name}${name}`, user.password);
+        await signUp.cancelSignUp("button");
     });
 
     test('Close cross should cancel sign up', async ({page}) => {
-        const signUpPage = new SignUpPage(page);
+        const signUp = new SignUp(page);
         const name = GenerateName();
-        await signUpPage.fillDetails(`${user.name}${name}`, user.password);
-        await signUpPage.cancelSignUp("cross");
+        await signUp.fillDetails(`${user.name}${name}`, user.password);
+        await signUp.cancelSignUp("cross");
     });
 
     test('Sign up button should confirm', async ({page}) => {
-        const signUpPage = new SignUpPage(page);
+        const signUp = new SignUp(page);
         const name = GenerateName();
-        await signUpPage.fillDetails(`${user.name}${name}`, user.password);
-        await signUpPage.confirmSignUp(true);
+        await signUp.fillDetails(`${user.name}${name}`, user.password);
+        await signUp.confirmSignUp(true);
     });
 
     test('Existing user should fail', async ({page}) => {
-        const signUpPage = new SignUpPage(page);
-        await signUpPage.fillDetails(user.name, user.password);
-        await signUpPage.confirmSignUp(false);
+        const signUp = new SignUp(page);
+        await signUp.fillDetails(user.name, user.password);
+        await signUp.confirmSignUp(false);
     });
 })
