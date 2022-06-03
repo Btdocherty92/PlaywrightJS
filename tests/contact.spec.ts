@@ -19,16 +19,16 @@ test.describe('Contact', () => {
 
     test('Close should cancel contact', async ({ modals }) => {
         await modals.contact.enterMessageDetails(details.email, details.name, details.message);
-        await modals.contact.cancelContact('button');
+        await modals.contact.cancelModal('button');
     });
 
     test('Close cross should cancel sign up', async ({ modals }) => {
         await modals.contact.enterMessageDetails(details.email, details.name, details.message);
-        await modals.contact.cancelContact('cross');
+        await modals.contact.cancelModal('cross');
     });
 
     test('Send message button should confirm', async ({ modals }) => {
         await modals.contact.enterMessageDetails(details.email, details.name, details.message);
-        await modals.contact.confirmSendMessage(true);
+        await modals.contact.confirmModal(true);
     });
 });

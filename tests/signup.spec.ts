@@ -23,23 +23,23 @@ test.describe('Sign up', () => {
     test('Close should cancel sign up', async ({ modals }) => {
         const name = GenerateName();
         await modals.signUp.fillDetails(`${user.name}${name}`, user.password);
-        await modals.signUp.cancelSignUp('button');
+        await modals.signUp.cancelModal('button');
     });
 
     test('Close cross should cancel sign up', async ({ modals }) => {
         const name = GenerateName();
         await modals.signUp.fillDetails(`${user.name}${name}`, user.password);
-        await modals.signUp.cancelSignUp('cross');
+        await modals.signUp.cancelModal('cross');
     });
 
     test('Sign up button should confirm', async ({ modals }) => {
         const name = GenerateName();
         await modals.signUp.fillDetails(`${user.name}${name}`, user.password);
-        await modals.signUp.confirmSignUp(true);
+        await modals.signUp.confirmModal(true);
     });
 
     test('Existing user should fail', async ({ modals }) => {
         await modals.signUp.fillDetails(user.name, user.password);
-        await modals.signUp.confirmSignUp(false);
+        await modals.signUp.confirmModal(false);
     });
 })
