@@ -11,6 +11,8 @@ export class BaseModal {
     // TODO: Consider changing this pattern as it's a tad hack-y
     get root () { return this.page.locator('') };
     get confirm() { return this.page.locator('') };
+    get messageSuccess() { return '' };
+    get messageFailure() { return '' };
 
     get close () { return this.root.locator('text=Close') };
     get crossClose () { return this.root.locator('[aria-label="Close"]') };
@@ -39,13 +41,14 @@ export class BaseModal {
 
     async confirmModal(success: boolean) {
         let message: string;
-        success ? message = 'Sign up successful.' : message = 'This user already exist.';
+        success ? message = this.messageSuccess : message = this.messageFailure;
 
-        await this.confirm.click();
         this.page.once('dialog', dialog => {
             expect(dialog.message()).toBe(`${message}`)
             dialog.dismiss().catch(() => {});
         });
+        await this.confirm.click();
+
         success ? await this.isDialogOpen(false) : await this.isDialogOpen(true);
     }
 }

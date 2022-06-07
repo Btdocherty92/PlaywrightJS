@@ -12,6 +12,7 @@ export class Contact extends BaseModal {
     // overwrite base locators
     get root () { return this.page.locator('#exampleModal') }
     get confirm () { return this.root.locator('button:has-text("Send message")') }
+    get messageSuccess() { return 'Thanks for the message!!' }
 
     // locators specific to Contact modal
     get email () { return this.root.locator('#recipient-email') }
